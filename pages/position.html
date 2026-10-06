@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Position window</title>
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    /* =========================================================
+       Professional material blue theme (#1976d2)
+       ========================================================= */
+    :root {
+      --position-blue: #1976d2;
+      --position-blue-dark: #1565c0;
+      --position-blue-light: #e3f2fd;
+      --position-blue-border: #bbdefb;
+      --position-blue-text: #0d47a1;
+    }
+
+    /* =========================================================
+       Footer
+       ========================================================= */
+    footer {
+      width: 100%;
+      margin-top: auto;
+      min-height: 64px;
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: #072037;
+      border-top: 2px solid #1976d2;
+      color: #b7c7d7;
+      font-size: 0.78rem;
+      line-height: 1.4;
+      box-shadow: 0 -4px 15px rgba(7, 32, 55, 0.08);
+    }
+
+    footer span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    footer span:first-child {
+      color: #94a9bf;
+      font-weight: 500;
+    }
+
+    footer span:nth-child(2) {
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    footer span:last-child {
+      color: #94a9bf;
+      text-align: right;
+      font-weight: 500;
+    }
+
+    /* =========================================================
+       Position page
+       ========================================================= */
+    .position-wrapper {
+      width: 100%;
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 10px 20px 25px;
+    }
+
+    /* =========================================================
+       Main position container
+       ========================================================= */
+    .position-container {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid var(--position-blue-border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 8px 28px rgba(25, 118, 210, 0.12);
+    }
+
+    /* =========================================================
+       Page heading
+       ========================================================= */
+    .position-heading {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e1e9f2;
+    }
+
+    .position-heading h2 {
+      margin: 0 0 8px;
+      color: var(--position-blue-text);
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+
+    .position-heading p {
+      margin: 0;
+      color: #667789;
+      font-size: 0.95rem;
+    }
+
+    /* =========================================================
+       Quick stats
+       ========================================================= */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat {
+      background: #f7faff;
+      border: 1px solid var(--position-blue-border);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      min-width: 0;
+      transition: 0.2s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(25, 118, 210, 0.15);
+      border-color: #90caf9;
+    }
+
+    .stat small,
+    .stat .label {
+      display: block;
+      color: #667789;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.4px;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--position-blue-text);
+      font-size: 1.05rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    /* =========================================================
+       Position sections
+       ========================================================= */
+    .pos-section {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .pos-card {
+      background: #ffffff;
+      border: 1px solid #d9e4ef;
+      border-radius: 12px;
+      padding: 22px 24px;
+    }
+
+    /* =========================================================
+       Card headings
+       ========================================================= */
+    .pos-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e3eaf1;
+      color: var(--position-blue);
+      font-size: 0.88rem;
+      letter-spacing: 0.6px;
+      font-weight: 700;
+    }
+
+    .pos-card h4::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: var(--position-blue);
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* =========================================================
+       Data table
+       ========================================================= */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table td {
+      padding: 11px 10px;
+      font-size: 0.94rem;
+      border-bottom: 1px solid #edf2f6;
+      vertical-align: middle;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table .label {
+      color: #64748b;
+      width: 38%;
+      font-weight: 600;
+    }
+
+    .data-table .value {
+      color: var(--position-blue-text);
+      font-weight: 700;
+    }
+
+    .data-table .tolerance {
+      color: #64748b;
+      font-weight: 500;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .highlight-val {
+      color: var(--position-blue) !important;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       Epoch grid
+       ========================================================= */
+    .epoch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .epoch-item {
+      background: #f7faff;
+      border: 1px solid #dce6f0;
+      border-radius: 9px;
+      padding: 14px 16px;
+      min-width: 0;
+    }
+
+    .epoch-item small,
+    .epoch-item .label {
+      display: block;
+      color: #64748b;
+      font-size: 0.76rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .epoch-item strong {
+      color: var(--position-blue-text);
+      font-size: 0.94rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    /* =========================================================
+       Home + back buttons (#1976d2)
+       ========================================================= */
+    .bottom-navigation {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #dfe7ec;
+    }
+
+    .bottom-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      height: 40px;
+      padding: 0 18px;
+      border-radius: 6px;
+      background: #1976d2;
+      border: 1px solid #1565c0;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 8px rgba(25, 118, 210, 0.2);
+    }
+
+    .bottom-nav-btn:hover {
+      background: #1565c0;
+      border-color: #0d47a1;
+      transform: translateY(-1px);
+      box-shadow: 0 5px 12px rgba(25, 118, 210, 0.3);
+    }
+
+    .position-bottom-navigation {
+      max-width: 1150px;
+      margin: 10px auto 0;
+      padding: 0 20px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .position-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 105px;
+      padding: 10px 18px;
+      border: 1px solid #1565c0;
+      border-radius: 7px;
+      background: #1976d2;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 8px rgba(25, 118, 210, 0.2);
+    }
+
+    .position-nav-btn:hover {
+      background: #1565c0;
+      border-color: #0d47a1;
+      transform: translateY(-1px);
+      box-shadow: 0 5px 12px rgba(25, 118, 210, 0.3);
+    }
+
+    .position-nav-btn:active,
+    .bottom-nav-btn:active {
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       Responsive breakpoints
+       ========================================================= */
+    @media (max-width: 768px) {
+      footer {
+        min-height: auto;
+        padding: 14px 18px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 6px;
+      }
+
+      footer span {
+        white-space: normal;
+        text-align: center !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .position-wrapper {
+        padding: 5px 10px 15px;
+      }
+
+      .position-container {
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .position-heading {
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+      }
+
+      .position-heading h2 {
+        font-size: 1.35rem;
+      }
+
+      .position-heading p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .stat {
+        padding: 15px;
+      }
+
+      .pos-section {
+        gap: 12px;
+      }
+
+      .pos-card {
+        padding: 17px 14px;
+        border-radius: 10px;
+      }
+
+      .data-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .data-table td {
+        padding: 9px 6px;
+        font-size: 0.84rem;
+      }
+
+      .data-table .label {
+        width: 42%;
+      }
+
+      .data-table .tolerance {
+        text-align: right;
+      }
+
+      .epoch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .position-bottom-navigation {
+        padding: 0 10px 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .position-nav-btn {
+        width: 100%;
+      }
+
+      footer {
+        min-height: auto;
+        padding: 16px 12px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 7px;
+      }
+
+      footer span {
+        white-space: normal;
+        text-align: center !important;
+        font-size: 0.73rem;
+      }
+
+      footer span:first-child {
+        order: 2;
+      }
+
+      footer span:nth-child(2) {
+        order: 1;
+      }
+
+      footer span:last-child {
+        order: 3;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .position-container {
+        padding: 12px;
+      }
+
+      .position-heading h2 {
+        font-size: 1.2rem;
+      }
+
+      .pos-card {
+        padding: 14px 11px;
+      }
+
+      .data-table td {
+        font-size: 0.78rem;
+      }
+
+      .epoch-item strong {
+        font-size: 0.84rem;
+      }
+
+      .position-nav-btn {
+        font-size: 0.82rem;
+        padding: 9px 14px;
+      }
+
+      footer {
+        padding: 14px 10px;
+        gap: 6px;
+      }
+
+      footer span {
+        font-size: 0.69rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">GPMS</div>
+        <div>
+          <strong>Gpms</strong>
+          <small>Performance monitor</small>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="../index.html">
+          <span>⌂</span>Home
+        </a>
+        <a class="nav-item" href="configuration.html">
+          <span>⚙</span>Configuration setting
+        </a>
+        <a class="nav-item active" href="position.html">
+          <span>◎</span>Position window
+        </a>
+        <a class="nav-item" href="sky-view.html">
+          <span>◉</span>Sky view
+        </a>
+        <a class="nav-item" href="dop.html">
+          <span>▥</span>Dilution of precision
+        </a>
+        <a class="nav-item" href="plan-view.html">
+          <span>⌖</span>Plan view
+        </a>
+        <a class="nav-item" href="signal-tracking.html">
+          <span>⌁</span>Signal tracking
+        </a>
+        <a class="nav-item" href="integrity.html">
+          <span>◫</span>Integrity graphs
+        </a>
+        <a class="nav-item" href="aviation.html">
+          <span>✈</span>Aviation graphs
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+      <!-- Topbar -->
+      <header class="topbar">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <div>
+          <div class="breadcrumb" style="color:#1e4f8a;">
+            GPMS / Position window
+          </div>
+          <h1>Position window</h1>
+        </div>
+      </header>
+
+      <!-- Page content -->
+      <div class="page-content">
+        <div class="position-wrapper">
+          <div class="position-container">
+
+            <!-- Page heading -->
+            <div class="position-heading">
+              <h3>Monitor GNSS position, altitude, solution status, and epoch timing.</h3>
+            </div>
+
+            <!-- Quick coordinate highlights -->
+            <div class="stats-grid">
+              <div class="stat">
+                <span class="label">Latitude</span>
+                <strong id="disp-lat">24.94605283558</strong>
+              </div>
+
+              <div class="stat">
+                <span class="label">Longitude</span>
+                <strong id="disp-lon">67.13613383441</strong>
+              </div>
+
+              <div class="stat">
+                <span class="label">Height / altitude</span>
+                <strong id="disp-height">49.4106 m</strong>
+              </div>
+
+              <div class="stat">
+                <span class="label">Satellites used</span>
+                <strong id="disp-sats" style="color:#1e4f8a;">21</strong>
+              </div>
+            </div>
+
+            <!-- Position data sections -->
+            <div class="pos-section">
+
+              <!-- Solution status -->
+              <div class="pos-card">
+                <h4>Solution status &amp; satellites</h4>
+                <table class="data-table">
+                  <tbody>
+                    <tr>
+                      <td class="label">Solution status :</td>
+                      <td class="value">Solution computed</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="label">Position type :</td>
+                      <td class="value">Single</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="label"># of satellites used in solution :</td>
+                      <td class="value highlight-val">21</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Epoch & timing -->
+              <div class="pos-card">
+                <h4>Epoch &amp; timing</h4>
+                <div class="epoch-grid">
+                  <div class="epoch-item">
+                    <span class="label">Starting epoch (UTC)</span>
+                    <strong>1/4/2017 1:00:00 AM</strong>
+                  </div>
+
+                  <div class="epoch-item">
+                    <span class="label">Elapsed time</span>
+                    <strong>0:0:0:0</strong>
+                  </div>
+
+                  <div class="epoch-item">
+                    <span class="label">Current epoch (UTC)</span>
+                    <strong>1/4/2017 1:59:59 AM</strong>
+                  </div>
+
+                  <div class="epoch-item">
+                    <span class="label">Current epoch (Local)</span>
+                    <strong>1/4/2017 6:59:59 AM</strong>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom navigation -->
+            <div class="bottom-navigation">
+              <a class="bottom-nav-btn" href="../index.html">Home</a>
+              <button class="bottom-nav-btn" onclick="history.back()">Back</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <span>Rx • Logging • Error</span>
+        <span>Copyright @SUP</span>
+        <span>GNSS performance monitoring toolkit</span>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>
